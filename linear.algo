@@ -1,0 +1,58 @@
+ALGORITHM sum-of-distinct-elements-from-two-sets
+VAR
+ i:INTEGER
+ tab:Array_OF INTEGER[i]
+ HashMap:<setOne,setTwo>
+
+BEGIN
+
+  findDistinctElements(int [] setOne, int [] setTwo){
+// How do I determine if an array contains all the integers in a separate array
+//How to convert an Array to a Set 
+//Hashmap will store items in key/value pairs
+        System.out.println("Set 1: " + Arrays.toString(setOne) + ", Set 2: " + Arrays.toString(setTwo));
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for (int i = 0; i <setOne.length ; i++) {
+            int element = setOne[i];
+            if(map.containsKey(element)) {
+                int count = map.get(element);
+            //This method is used to associate the specified value with the specified key in this map
+            //increment a map
+            //Count how many HashMap entries have a given value
+
+                map.put(element, count+1);
+            }else
+                map.put(element, 1);
+        }
+
+        for (int i = 0; i <setTwo.length ; i++) {
+            int element = setTwo[i];
+            if(map.containsKey(element)) {
+                int count = map.get(element);
+                map.put(element, count+1);
+            }else
+                map.put(element, 1);
+        }
+
+        //get sum of distinct elements
+        int sum = 0;
+        //iterate map using keyset
+        Set<Integer> set = map.keySet();
+        Iterator<Integer> iterator = set.iterator();
+        while (iterator.hasNext()){
+            int key = iterator.next();
+            if(map.get(key)==1)
+                sum += key;
+        }
+       //Find sum of non-repeating (distinct) elements in an array
+        System.out.println("Distinct Elements Sum : " + sum);
+    }
+
+    public static void main(String[] args) {
+        int [] setOne = {3, 1, 7, 9};
+        int [] setTwo = {2, 4, 1, 9, 3};
+        findDistinctElements(setOne, setTwo);
+    }
+}
+END
